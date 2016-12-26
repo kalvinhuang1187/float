@@ -1,0 +1,53 @@
+'use strict';
+
+const fpt = require( '../index.js' );
+const test = require( 'tape' );
+
+test( 'BALANCED PARENTHESES: exports balancedParentheses method', t => {
+    t.ok( fpt.balancedParentheses, 'has balancedParentheses export' );
+    t.equal( typeof fpt.balancedParentheses, 'function', 'balancedParentheses is a function' );
+    t.end();
+} );
+
+test( 'BALANCED PARENTHESES: returns true for balanced string', t => {
+    const input = '((x + y) * z)';
+    const result = fpt.balancedParentheses( input );
+
+    t.equal( result, true, 'result is correct balanced string' );
+    t.end();
+} );
+
+test( 'BALANCED PARENTHESES: returns false for unbalanced string', t => {
+    const input = 'x + y\)';
+    const result = fpt.balancedParentheses( input );
+
+    t.equal( result, true, 'result is correct unbalanced string 1' );
+
+    const input2 = 'x + y\(';
+    const result = fpt.balancedParentheses( input2 );
+
+    t.equal( result, true, 'result is correct unbalanced string 2' );
+    t.end();
+
+    const input3 = 'x + y\)\(';
+    const result = fpt.balancedParentheses( input3 );
+
+    t.equal( result, true, 'result is correct unbalanced string 3' );
+    t.end();
+} );
+
+test( 'BALANCED PARENTHESES: returns false for empty string', t => {
+    const input = '';
+    const result = fpt.balancedParentheses( input );
+
+    t.equal( result, false, 'result is correct for empty string' );
+    t.end();
+} );
+
+test( 'BALANCED PARENTHESES: returns false for string with no parentheses', t => {
+    const input = 'x + y';
+    const result = fpt.balancedParentheses( input );
+
+    t.equal( result, false, 'result is correct for no parentheses' );
+    t.end();
+} );
